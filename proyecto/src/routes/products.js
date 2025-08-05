@@ -8,10 +8,13 @@ router.get('/', async (req, res) => {
     res.json(products)
 })
 
-router.get('/:pid', async (req, res) => {
-    const product = await productManager.getProductById(req.params.pid)
-    if(!product) return res.status(404).json({error: `Producto no encontrado`})
-    res.json(product)
+router.get('/:pid', async (req, res) => { 
+    try{
+        const product = await productManager.getProductById(req.params.pid)
+        res.json(product)
+    } catch (error) {
+        res.status(404).json({error:'No se encontro el producto'})
+    }
 })
 
 router.post('/', async (req, res) => {
@@ -28,8 +31,11 @@ router.put('/:pid', async (req, res) => {
     }
 })
 
-router.delete('/:pid', async (req, res) => {
-    const succes = await productManager.deleteProduct(req.params.pid)
-    if(!succes) return res.status(404).json({error: `Producto no encontrado`})
-    res.json({message: `Producto eliminado`})
+router.delete('/:pid', async (req, res) => { 
+    try {
+        const succes = await productManager.deleteProduct(req.params.pid)
+        res.status(200).json(deleteProduct)
+    } catch (error) {
+        res.status(404).json({error: 'No se puede eliminar el producto porque no existe'})
+    }
 })
