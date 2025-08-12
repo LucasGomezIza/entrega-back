@@ -1,16 +1,16 @@
 {
   "name": "entrega-back",
   "version": "1.0.0",
-  "main": "src/app.js",
+  "main": "proyecto/src/app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "start": "node proyecto/src/app.js",
+    "dev": "nodemon proyecto/src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "nodemon": "^3.1.10"
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
