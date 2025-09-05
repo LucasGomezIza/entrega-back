@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "main": "proyecto/src/app.js",
   "scripts": {
-    "start": "node proyecto/src/app.js",
-    "dev": "nodemon proyecto/src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon proyecto/src/server.js",
+    "start": "node proyecto/src/server.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
+  "type": "module",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.2",
+    "morgan": "^1.10.1",
+    "socket-io": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

@@ -8,7 +8,7 @@ app.use(express.json())
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartsRouter)
 
-app.listen(8080, () => {
-    console.log('Servidor escuchando el en el puerto 8080')
-})
+module.exports = app;
+
+
 
