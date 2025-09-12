@@ -11,3 +11,7 @@ const ProductSchema = new Schema({
     category: { type: String, required: true, index: true },
     thumbnails: { type: [String], default: [] }
     }, { timestamps: true });
+
+ProductSchema.plugin(mongoosePaginate)
+module.exports = model('Product', ProductSchema)
+
