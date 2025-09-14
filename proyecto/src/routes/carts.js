@@ -1,29 +1,13 @@
-const express = require('express')
-const CartManager = require('../managers/cartManager')
-const router = express.Router()
-const cartManager = new CartManager('proyecto/data/carts.json')
+const { Router } = require('express');
+const ctrl = require('../controllers/carts.controller');
+const router = Router();
 
-router.post('/', async (req, res) => {
-    const newCart = await cartManager.createCart()
-    res.status(201).json(newCart)
-})
+router.post('/', ctrl.createCart);
+router.get('/:cid', ctrl.getCart);
+router.put('/:cid', ctrl.replaceCart);
+router.delete('/:cid', ctrl.emptyCart);
+router.post('/:cid/product/:pid', ctrl.addProduct);
+router.put('/:cid/product/:pid', ctrl.updateProductQty);
+router.delete('/:cid/product/:pid', ctrl.removeProduct);
 
-router.get('/:cid', async (req, res) => {
-    const cart = await cartManager.getCartById(req.params.cid)
-    if(!cart) return res.status(404).json({error: 'Carrito o producto no encontrado'})
-    res.json(cart)
-})
-
-router.post('/:cid/products/:pid', async (req, res) => {
-    const cart = await cartManager.getCartById(req.params.cid)
-    if(!cart) return res.status(404).json({error: 'No fue posible encontrar el carrito'})
-    const productIndex = cart.products.findIndex(p => p.product === req.params.pid)
-    if (productIndex !== -1) {
-        cart.products[productIndex].quantity += 1
-    } else {
-        cart.products.push({ product: req.params.pid, quantity: 1})
-    }
-    await cartManager.updateCart(req.params.cid, cart)
-    res.json(cart)
-})
-module.exports = router
+module.exports = router;

@@ -3,6 +3,16 @@ const productRouter = require('./routes/products')
 const cartsRouter = require('./routes/carts')
 const path = require('path')
 const { engine } = require('express-handlebars')
+const mongoose = require('mongoose')
+
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    }).then(() => console.log('Conectado a la base de datos'))
+
+    .catch(function(error) {console.error('Error de conexión a la base de datos:', error)});
+
+const PORT = process.env.PORT || 8080;
 
 const app = express()
 app.use(express.json())
